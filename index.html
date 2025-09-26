@@ -19,23 +19,28 @@
             display: none;
             width: 100%;
             height: 100%;
-            padding: 4rem 2rem;
+            padding: 2rem 4rem; /* Adjusted padding for columns */
             position: absolute;
             top: 0;
             left: 0;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            align-items: center;
         }
         .slide.active {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             opacity: 1;
         }
-        .slide-content {
-            max-width: 1024px;
+        .slide-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* 2/3 for slide, 1/3 for notes */
+            gap: 2rem;
             width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        .slide-content {
             text-align: center;
         }
         .chart-container {
@@ -58,23 +63,34 @@
             text-align: left;
         }
         .speaker-notes {
-            display: none;
+            border-left: 2px solid #E2E8F0;
+            padding: 1.5rem;
+            background-color: #F7FAFC;
+            font-size: 0.9rem;
+            color: #2D3748;
+            text-align: left;
+            height: fit-content;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 8px;
+        }
+        .speaker-notes h4 {
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            color: #2C5282;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+         .speaker-notes p {
+            line-height: 1.6;
         }
 
         @media print {
-            body {
-                overflow: visible !important;
-                background-color: #FFF;
-            }
-            #slide-navigation {
-                display: none !important;
-            }
+            body { overflow: visible !important; background-color: #FFF; }
+            #slide-navigation { display: none !important; }
             .slide {
-                display: flex !important;
-                flex-direction: row;
-                align-items: flex-start;
-                justify-content: center;
-                width: 100%;
+                display: block !important;
                 height: 98vh;
                 page-break-after: always;
                 opacity: 1 !important;
@@ -82,39 +98,11 @@
                 padding: 1.5rem;
                 background-color: #FFF;
             }
-            .slide-content {
-                flex: 1.5;
-                padding-right: 1.5rem;
-                text-align: left;
-            }
-            .speaker-notes {
-                display: block !important;
-                flex: 1;
-                border-left: 2px solid #E2E8F0;
-                padding: 1rem;
-                background-color: #F7FAFC;
-                font-size: 11px;
-                color: #2D3748;
-                text-align: left;
-                height: 100%;
-                overflow-y: auto;
-                border-radius: 8px;
-            }
-            .speaker-notes h4 {
-                font-weight: 700;
-                margin-bottom: 0.5rem;
-                font-size: 12px;
-                color: #2C5282;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-            }
-            .speaker-notes p {
-                line-height: 1.5;
-            }
+            .slide-grid { display: flex; flex-direction: row; align-items: flex-start; }
+            .slide-content { flex: 1.5; padding-right: 1.5rem; text-align: left; }
+            .speaker-notes { flex: 1; font-size: 11px; }
             h1, h2, h3 { text-align: left; }
-            .slide-content.text-center, .slide-content .text-center {
-                text-align: left !important;
-            }
+            .slide-content.text-center, .slide-content .text-center { text-align: left !important; }
             .mx-auto { margin-left: 0; margin-right: 0; }
         }
     </style>
@@ -123,215 +111,237 @@
 
     <!-- Slide 1: Title -->
     <div id="slide-1" class="slide active">
-        <div class="slide-content text-center">
-            <h1 class="text-5xl">Mental Health First Aid Program</h1>
-            <h3 class="mt-4 text-2xl">A Review of Impact and Strategic Recommendations</h3>
-            <p class="mt-12 text-lg text-gray-600">September 2025</p>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"Good morning. Thank you for your time. Today we'll be presenting the key findings from our recent Mental Health First Aid program survey, including the impact on participants and our strategic recommendations moving forward."</p>
+        <div class="slide-grid">
+            <div class="slide-content text-center flex flex-col justify-center">
+                <h1 class="text-5xl">Mental Health First Aid Program</h1>
+                <h3 class="mt-4 text-2xl">A Review of Impact and Strategic Recommendations</h3>
+                <p class="mt-12 text-lg text-gray-600">September 2025</p>
+            </div>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"Good morning. Thank you for your time. Today we'll be presenting the key findings from our recent Mental Health First Aid program survey, including the impact on participants and our strategic recommendations moving forward."</p>
+            </div>
         </div>
     </div>
 
     <!-- Slide 2: Executive Summary -->
     <div id="slide-2" class="slide">
-        <div class="slide-content text-left max-w-4xl mx-auto">
-            <h2 class="text-3xl text-center">The MHFA Program is a Proven Success and a Strategic Asset.</h2>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-lg">
-                <div>
-                    <h3 class="font-bold text-xl border-b-2 border-blue-500 pb-2 mb-2">Exceptional Impact</h3>
-                    <p>Highly effective, demonstrably boosting confidence (4.5/5 avg. increase) and leading to tangible, real-world application of skills.</p>
-                </div>
-                <div>
-                    <h3 class="font-bold text-xl border-b-2 border-green-500 pb-2 mb-2">Clear ROI</h3>
-                    <p>Delivers a clear return on investment by equipping individuals with crisis-response skills, fostering a supportive culture, and achieving an outstanding recommendation rate of 9.7/10.</p>
-                </div>
-                <div class="text-base">
-                    <h3 class="font-bold text-xl border-b-2 border-yellow-500 pb-2 mb-2">Key Strengths</h3>
-                    <ul class="space-y-3 mt-3">
-                        <li class="flex items-center"><span class="flex items-center justify-center w-6 h-6 mr-3 bg-green-100 rounded-full text-green-700 font-bold">&#10003;</span> Exceptional skill application rate (92.3%)</li>
-                        <li class="flex items-center"><span class="flex items-center justify-center w-6 h-6 mr-3 bg-green-100 rounded-full text-green-700 font-bold">&#10003;</span> Strong mandate for continuation</li>
-                        <li class="flex items-center"><span class="flex items-center justify-center w-6 h-6 mr-3 bg-green-100 rounded-full text-green-700 font-bold">&#10003;</span> Clear optimization path identified</li>
-                        <li class="flex items-center"><span class="flex items-center justify-center w-6 h-6 mr-3 bg-green-100 rounded-full text-green-700 font-bold">&#10003;</span> Built-in pipeline for advanced training</li>
-                    </ul>
+        <div class="slide-grid">
+            <div class="slide-content text-left">
+                <h2 class="text-3xl text-center">The MHFA Program is a Proven Success and a Strategic Asset.</h2>
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-lg">
+                    <div>
+                        <h3 class="font-bold text-xl border-b-2 border-blue-500 pb-2 mb-2">Exceptional Impact</h3>
+                        <p>Highly effective, demonstrably boosting confidence (4.5/5 avg. increase) and leading to tangible, real-world application of skills.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl border-b-2 border-green-500 pb-2 mb-2">Clear ROI</h3>
+                        <p>Delivers a clear return on investment by equipping individuals with crisis-response skills, fostering a supportive culture, and achieving an outstanding recommendation rate of 9.7/10.</p>
+                    </div>
+                    <div class="text-base">
+                        <h3 class="font-bold text-xl border-b-2 border-yellow-500 pb-2 mb-2">Key Strengths</h3>
+                        <ul class="space-y-3 mt-3">
+                            <li class="flex items-center"><span class="flex items-center justify-center w-6 h-6 mr-3 bg-green-100 rounded-full text-green-700 font-bold">&#10003;</span> Exceptional skill application rate (92.3%)</li>
+                            <li class="flex items-center"><span class="flex items-center justify-center w-6 h-6 mr-3 bg-green-100 rounded-full text-green-700 font-bold">&#10003;</span> Strong mandate for continuation</li>
+                            <li class="flex items-center"><span class="flex items-center justify-center w-6 h-6 mr-3 bg-green-100 rounded-full text-green-700 font-bold">&#10003;</span> Clear optimization path identified</li>
+                            <li class="flex items-center"><span class="flex items-center justify-center w-6 h-6 mr-3 bg-green-100 rounded-full text-green-700 font-bold">&#10003;</span> Built-in pipeline for advanced training</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"To begin, the key takeaway is that the MHFA program has been a clear and measurable success. It shows exceptional impact on confidence, a clear ROI by fostering a supportive culture, and several key strengths—including a staggering 92.3% skill application rate—that provide a strong mandate for its continuation and strategic expansion."</p>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"To begin, the key takeaway is that the MHFA program has been a clear and measurable success. It shows exceptional impact on confidence, a clear ROI by fostering a supportive culture, and several key strengths—including a staggering 92.3% skill application rate—that provide a strong mandate for its continuation and strategic expansion."</p>
+            </div>
         </div>
     </div>
 
     <!-- Slide 3: Finding 1 -->
     <div id="slide-3" class="slide">
-        <div class="slide-content">
-            <h2>Finding 1: The Program Delivers a Significant Uplift in Confidence</h2>
-            <h3>Participants feel overwhelmingly more prepared to act in a crisis.</h3>
-            <div class="chart-container" style="height: 350px;">
-                <canvas id="confidenceChart"></canvas>
+        <div class="slide-grid">
+            <div class="slide-content">
+                <h2>Finding 1: The Program Delivers a Significant Uplift in Confidence</h2>
+                <h3>Participants feel overwhelmingly more prepared to act in a crisis.</h3>
+                <div class="chart-container" style="height: 350px;">
+                    <canvas id="confidenceChart"></canvas>
+                </div>
+                <p class="font-bold mt-4">Key Takeaway:</p>
+                <p>The program is exceptionally successful in its primary goal of building confidence.</p>
             </div>
-            <p class="font-bold mt-4">Key Takeaway:</p>
-            <p>The program is exceptionally successful in its primary goal of building confidence.</p>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"Our first key finding relates to confidence. As you can see, the program has been overwhelmingly effective in making people feel prepared to handle a mental health situation. We saw an average increase of 4.5 on a 5-point scale, a truly significant uplift."</p>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"Our first key finding relates to confidence. As you can see, the program has been overwhelmingly effective in making people feel prepared to handle a mental health situation. We saw an average increase of 4.5 on a 5-point scale, a truly significant uplift."</p>
+            </div>
         </div>
     </div>
     
     <!-- Slide 4: Finding 2 -->
     <div id="slide-4" class="slide">
-        <div class="slide-content">
-            <h2>Finding 2: Training Translates Directly to Real-World Action</h2>
-            <h3>The skills learned are not theoretical; they are being actively applied.</h3>
-            <div class="chart-container">
-                <canvas id="skillsUsedChart"></canvas>
+        <div class="slide-grid">
+            <div class="slide-content">
+                <h2>Finding 2: Training Translates Directly to Real-World Action</h2>
+                <h3>The skills learned are not theoretical; they are being actively applied.</h3>
+                <div class="chart-container">
+                    <canvas id="skillsUsedChart"></canvas>
+                </div>
+                <p class="font-bold mt-4">Key Takeaway:</p>
+                <p>92.3% of participants have already used their skills, demonstrating the program's tangible, real-world utility.</p>
             </div>
-            <p class="font-bold mt-4">Key Takeaway:</p>
-            <p>92.3% of participants have already used their skills, demonstrating the program's tangible, real-world utility.</p>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"Crucially, this confidence isn't just a feeling—it translates directly into action. A remarkable 92.3% of our participants have already had an opportunity to use their skills in a real-world scenario. This demonstrates the program's practical value and immediate utility."</p>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"Crucially, this confidence isn't just a feeling—it translates directly into action. A remarkable 92.3% of our participants have already had an opportunity to use their skills in a real-world scenario. This demonstrates the program's practical value and immediate utility."</p>
+            </div>
         </div>
     </div>
 
     <!-- Slide 5: Finding 3 -->
     <div id="slide-5" class="slide">
-        <div class="slide-content">
-            <h2>Finding 3: Fostering a More Supportive and Aware Culture</h2>
-            <h3>The program’s benefits extend beyond crisis intervention.</h3>
-            <div class="chart-container" style="max-width: 450px; height: 350px;">
-                <canvas id="awarenessChart"></canvas>
+        <div class="slide-grid">
+            <div class="slide-content">
+                <h2>Finding 3: Fostering a More Supportive and Aware Culture</h2>
+                <h3>The program’s benefits extend beyond crisis intervention.</h3>
+                <div class="chart-container" style="max-width: 450px; height: 350px;">
+                    <canvas id="awarenessChart"></canvas>
+                </div>
+                <p class="font-bold mt-4">Key Takeaway:</p>
+                <p>The training creates a positive cultural ripple effect, improving awareness and willingness to engage.</p>
             </div>
-             <p class="font-bold mt-4">Key Takeaway:</p>
-            <p>The training creates a positive cultural ripple effect, improving awareness and willingness to engage.</p>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"Beyond crisis response, the program is also fostering a more supportive culture. Participants reported significant improvements in their awareness of their own mental health, their personal biases, and, most importantly, their willingness to start what can often be difficult conversations about mental health."</p>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"Beyond crisis response, the program is also fostering a more supportive culture. Participants reported significant improvements in their awareness of their own mental health, their personal biases, and, most importantly, their willingness to start what can often be difficult conversations about mental health."</p>
+            </div>
         </div>
     </div>
 
     <!-- Slide 6: Driver of Success -->
     <div id="slide-6" class="slide">
-        <div class="slide-content">
-            <h2>The Primary Driver of Success: The Learning Environment</h2>
-            <h3>The data clearly shows what makes this program work.</h3>
-            <div class="chart-container" style="height: 350px; max-width: 600px;">
-                <canvas id="bestAspectsChart"></canvas>
+        <div class="slide-grid">
+            <div class="slide-content">
+                <h2>The Primary Driver of Success: The Learning Environment</h2>
+                <h3>The data clearly shows what makes this program work.</h3>
+                <div class="chart-container" style="height: 350px; max-width: 600px;">
+                    <canvas id="bestAspectsChart"></canvas>
+                </div>
+                <p class="font-bold mt-4">Key Takeaway:</p>
+                <p>The most valued aspects are the quality of the instructor and the interactive, supportive environment they create.</p>
             </div>
-             <p class="font-bold mt-4">Key Takeaway:</p>
-            <p>The most valued aspects are the quality of the instructor and the interactive, supportive environment they create.</p>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"When we analyzed what made the program so successful, the data was unequivocal. The quality of the instructor and the interactive, safe learning environment were, by far, the most valued aspects. This tells us exactly what model to replicate for future success."</p>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"When we analyzed what made the program so successful, the data was unequivocal. The quality of the instructor and the interactive, safe learning environment were, by far, the most valued aspects. This tells us exactly what model to replicate for future success."</p>
+            </div>
         </div>
     </div>
     
     <!-- Slide 7: Human Impact -->
     <div id="slide-7" class="slide">
-        <div class="slide-content max-w-3xl text-left">
-            <h2 class="text-center">The Human Impact: In Their Own Words</h2>
-            <blockquote class="text-xl">
-                <p>"The training helped me identify that a friend was going through a mental health crisis. I was able to talk to her and help her find the resources she needed. <strong>I felt so much more equipped...</strong>"</p>
-            </blockquote>
-            <blockquote class="text-xl">
-                <p>"I realized that <strong>I was experiencing burnout myself.</strong> The class gave me the language and awareness to talk about it with my manager and seek support..."</p>
-            </blockquote>
-            <blockquote class="text-xl">
-                <p>"It helped <strong>normalize mental health conversations in my family.</strong> We are now more open with each other about our struggles."</p>
-            </blockquote>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"The quantitative data is powerful, but so are the personal stories. These anonymous quotes show the human impact—from helping a friend in crisis, to recognizing burnout in oneself, to normalizing these conversations within a family. This is the kind of impact that numbers alone can't fully capture."</p>
+        <div class="slide-grid">
+            <div class="slide-content max-w-3xl text-left">
+                <h2 class="text-center">The Human Impact: In Their Own Words</h2>
+                <blockquote class="text-xl">
+                    <p>"The training helped me identify that a friend was going through a mental health crisis. I was able to talk to her and help her find the resources she needed. <strong>I felt so much more equipped...</strong>"</p>
+                </blockquote>
+                <blockquote class="text-xl">
+                    <p>"I realized that <strong>I was experiencing burnout myself.</strong> The class gave me the language and awareness to talk about it with my manager and seek support..."</p>
+                </blockquote>
+                <blockquote class="text-xl">
+                    <p>"It helped <strong>normalize mental health conversations in my family.</strong> We are now more open with each other about our struggles."</p>
+                </blockquote>
+            </div>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"The quantitative data is powerful, but so are the personal stories. These anonymous quotes show the human impact—from helping a friend in crisis, to recognizing burnout in oneself, to normalizing these conversations within a family. This is the kind of impact that numbers alone can't fully capture."</p>
+            </div>
         </div>
     </div>
 
     <!-- Slide 8: Pricing Opinion -->
     <div id="slide-8" class="slide">
-        <div class="slide-content">
-            <h2>Participant View on Pricing: A Barrier to Access</h2>
-            <h3>We asked participants if they would have paid $125 for the course.</h3>
-            <div class="chart-container">
-                <canvas id="pricingChart"></canvas>
+        <div class="slide-grid">
+            <div class="slide-content">
+                <h2>Participant View on Pricing: A Barrier to Access</h2>
+                <h3>We asked participants if they would have paid $125 for the course.</h3>
+                <div class="chart-container">
+                    <canvas id="pricingChart"></canvas>
+                </div>
             </div>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"We also tested the perception of value. When asked if they would have paid $125, the response was mixed. A significant number indicated the cost would have been a barrier. This provides a clear insight: maintaining a low or no-cost model is essential if our goal is to maximize the program's reach and impact."</p>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"We also tested the perception of value. When asked if they would have paid $125, the response was mixed. A significant number indicated the cost would have been a barrier. This provides a clear insight: maintaining a low or no-cost model is essential if our goal is to maximize the program's reach and impact."</p>
+            </div>
         </div>
     </div>
 
     <!-- Slide 9: Acknowledging Biases & Limitations -->
     <div id="slide-9" class="slide">
-        <div class="slide-content text-left max-w-4xl mx-auto">
-            <h2 class="text-3xl text-center">Acknowledging Biases & Limitations</h2>
-            <h3 class="text-center">For full transparency, it's important to consider the context of this data.</h3>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-lg">
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="font-bold text-xl pb-2 mb-2">Small Sample Size</h3>
-                    <p>The survey reflects feedback from 13 out of 65 contacted past participants. While the insights are valuable, they may not represent the views of all attendees.</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="font-bold text-xl pb-2 mb-2">Relationship Bias</h3>
-                    <p>A majority of respondents had a pre-existing relationship with the instructor, which could correlate with a more positive and engaged experience.</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="font-bold text-xl pb-2 mb-2">Positivity Bias</h3>
-                    <p>Individuals who had a positive experience are generally more likely to respond to feedback surveys, potentially skewing the results in a favorable direction.</p>
+        <div class="slide-grid">
+            <div class="slide-content text-left max-w-4xl mx-auto">
+                <h2 class="text-3xl text-center">Acknowledging Biases & Limitations</h2>
+                <h3 class="text-center">For full transparency, it's important to consider the context of this data.</h3>
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-lg">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-xl pb-2 mb-2">Small Sample Size</h3>
+                        <p>The survey reflects feedback from 13 out of 65 contacted past participants. While the insights are valuable, they may not represent the views of all attendees.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-xl pb-2 mb-2">Relationship Bias</h3>
+                        <p>A majority of respondents had a pre-existing relationship with the instructor, which could correlate with a more positive and engaged experience.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-bold text-xl pb-2 mb-2">Positivity Bias</h3>
+                        <p>Individuals who had a positive experience are generally more likely to respond to feedback surveys, potentially skewing the results in a favorable direction.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"Before we move to recommendations, I want to address the limitations of this survey for full transparency. The sample size is small, and we recognize there's a potential for both relationship bias and positivity bias in the results. This doesn't invalidate the positive findings, but it provides important context that the results reflect a highly engaged, positive subset of participants."</p>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"Before we move to recommendations, I want to address the limitations of this survey for full transparency. The sample size is small, and we recognize there's a potential for both relationship bias and positivity bias in the results. This doesn't invalidate the positive findings, but it provides important context that the results reflect a highly engaged, positive subset of participants."</p>
+            </div>
         </div>
     </div>
 
     <!-- Slide 10: Recommendations -->
     <div id="slide-10" class="slide">
-        <div class="slide-content max-w-4xl">
-            <h2 class="text-center">Strategic Recommendations</h2>
-            <h3>The data points toward a clear path for program evolution and growth.</h3>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-lg text-left">
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="font-bold text-xl text-blue-600">1. EXPAND CURRICULUM</h3>
-                    <p class="font-semibold">Offer Advanced 'Deep Dive' Courses</p>
-                    <p class="mt-2 text-base">Capitalize on participant interest by developing advanced modules on the most requested topics: Mental Health & Diet, Trauma, and ADHD.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="font-bold text-xl text-green-600">2. OPTIMIZE DELIVERY</h3>
-                     <p class="font-semibold">Standardize the Optimal Format</p>
-                    <p class="mt-2 text-base">The data shows a clear preference for fully <strong>in-person delivery</strong>. Within this format, a schedule of <strong>two 4-hour sessions</strong> can cater to professional timetables while maximizing engagement.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="font-bold text-xl text-yellow-600">3. REFINE PRICING STRATEGY</h3>
-                    <p class="font-semibold">Implement a Two-Track Model</p>
-                    <p class="mt-2 text-base">Introduce standard fees for corporate and professional clients, while using grants and sponsorships to fund a low-cost track for increased accessibility.</p>
+        <div class="slide-grid">
+            <div class="slide-content max-w-4xl">
+                <h2 class="text-center">Strategic Recommendations</h2>
+                <h3>The data points toward a clear path for program evolution and growth.</h3>
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-lg text-left">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="font-bold text-xl text-blue-600">1. EXPAND CURRICULUM</h3>
+                        <p class="font-semibold">Offer Advanced 'Deep Dive' Courses</p>
+                        <p class="mt-2 text-base">Capitalize on participant interest by developing advanced modules on the most requested topics: Mental Health & Diet, Trauma, and ADHD.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="font-bold text-xl text-green-600">2. OPTIMIZE DELIVERY</h3>
+                        <p class="font-semibold">Standardize the Optimal Format</p>
+                        <p class="mt-2 text-base">The data shows a clear preference for fully <strong>in-person delivery</strong>. Within this format, a schedule of <strong>two 4-hour sessions</strong> can cater to professional timetables while maximizing engagement.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="font-bold text-xl text-yellow-600">3. REFINE PRICING STRATEGY</h3>
+                        <p class="font-semibold">Implement a Two-Track Model</p>
+                        <p class="mt-2 text-base">Introduce standard fees for corporate and professional clients, while using grants and sponsorships to fund a low-cost track for increased accessibility.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"With that context in mind, we have three strategic recommendations. First, to Expand the curriculum by offering the advanced, 'deep-dive' courses that participants are asking for. Second, to Optimize delivery by standardizing the format that combines the most preferred elements: in-person delivery, broken into two 4-hour sessions. And third, to Refine the pricing strategy with a two-track model to ensure both financial sustainability and continued community access."</p>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"With that context in mind, we have three strategic recommendations. First, to Expand the curriculum by offering the advanced, 'deep-dive' courses that participants are asking for. Second, to Optimize delivery by standardizing the format that combines the most preferred elements: in-person delivery, broken into two 4-hour sessions. And third, to Refine the pricing strategy with a two-track model to ensure both financial sustainability and continued community access."</p>
+            </div>
         </div>
     </div>
 
     <!-- Slide 11: Conclusion -->
     <div id="slide-11" class="slide">
-        <div class="slide-content">
-            <h2 class="text-4xl">Conclusion</h2>
-            <p class="mt-8 text-2xl max-w-3xl mx-auto">The Mental Health First Aid program has proven to be an <span class="font-bold text-blue-600">invaluable strategic initiative.</span></p>
-            <p class="mt-4 text-xl max-w-3xl mx-auto">It successfully equips individuals, translates to tangible action, and fosters a healthier, more supportive culture. The data supports not just the continuation of this program, but its strategic expansion.</p>
-        </div>
-        <div class="speaker-notes">
-            <h4>SPEAKER NOTES</h4>
-            <p>"In conclusion, the data confirms that the Mental Health First Aid program is a strategic asset. It delivers a clear return by building a more confident, skilled, and supportive community. We believe the evidence strongly supports its continued investment and expansion. Thank you, I'd be happy to take any questions."</p>
+        <div class="slide-grid">
+            <div class="slide-content flex flex-col justify-center">
+                <h2 class="text-4xl">Conclusion</h2>
+                <p class="mt-8 text-2xl max-w-3xl mx-auto">The Mental Health First Aid program has proven to be an <span class="font-bold text-blue-600">invaluable strategic initiative.</span></p>
+                <p class="mt-4 text-xl max-w-3xl mx-auto">It successfully equips individuals, translates to tangible action, and fosters a healthier, more supportive culture. The data supports not just the continuation of this program, but its strategic expansion.</p>
+            </div>
+            <div class="speaker-notes">
+                <h4>SPEAKER NOTES</h4>
+                <p>"In conclusion, the data confirms that the Mental Health First Aid program is a strategic asset. It delivers a clear return by building a more confident, skilled, and supportive community. We believe the evidence strongly supports its continued investment and expansion. Thank you, I'd be happy to take any questions."</p>
+            </div>
         </div>
     </div>
 
@@ -458,3 +468,4 @@
     </script>
 </body>
 </html>
+
